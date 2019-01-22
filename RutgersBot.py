@@ -15,6 +15,7 @@ command_dict = {'rte': mi.rtrv_rte, 'stp': mi.rtrv_stps, 'arvl': mi.rtrv_arvl, '
 
 @client.event
 async def on_ready():
+        await client.change_presence(status=discord.Status.online,activity=discord.Game(name="office hours"))
         print('we have logged in as {0!r}'.format(client.user.name))
 
 @client.event
@@ -96,4 +97,5 @@ async def on_message(message):
 			await message.channel.send('This bus will arrive in ' + arrivalTime + ' minutes')
 """
 
-client.run("NTMwODk2NzY1NDQ1MjEwMTEz.DxGFiA.sJBQZgGTOpxmTDqMxEwFAeNKJKg")
+
+client.run("NTI4MzI0NjYzNzU2MDYyNzM5.Dwhc1w.ses0qDrs8mYOfuqY66jcRMHChzU")
