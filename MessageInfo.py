@@ -1,14 +1,20 @@
 import urllib.request
+import discord
 from xml.dom import minidom
 
 
 def rtrv_rte(bus_obj, *arg):
-    rte_lst = '{:^60}'.format('please use abbreviated name in bot commands') + '\n'
-    rte_lst += '{:30}'.format('bus Line') + '{:>30}'.format('abbreviated Name') + '\n'
+    embed = discord.Embed(title="Please use the abbreviated name in the commands", description="", color=0xb00800)
     arvl = bus_obj.rte
+    keys = ""
+    vals = ""
     for key, val in arvl.items():
-        rte_lst += '{:30}'.format(key) + '{:>30}'.format(val) + '\n'
-    return rte_lst
+        keys = keys + key + "\n"
+        vals = vals + val + "\n"
+    embed = embed.add_field(name = "Bus Line", value = keys, inline= True)
+    embed = embed.add_field(name = "\u200b",value = "\u200b", inline= True)
+    embed = embed.add_field(name = "Abbreviated Name", value = vals, inline=True)
+    return embed
 
 
 def rtrv_stps(bus_obj, command):
@@ -28,7 +34,8 @@ def rtrv_arvl(bus_obj, command):
     attributes = predictions[0].attributes
     for counter in range(len(attributes)):
         if str(attributes.item(counter).nodeName) == 'dirTitleBecauseNoPredictions':
-            return 'This bus is not currently running'
+            embed = discord.Embed(title="Arrival Times", description= "The bus is not currently running.", color=0xb00800)
+            return embed
     arvl_info = dom.getElementsByTagName('prediction')
     for counter in range(arvl_info.length):
         arvl_tms.append(str(arvl_info[counter].attributes['minutes'].value))
@@ -37,13 +44,18 @@ def rtrv_arvl(bus_obj, command):
             arvl_msg += 'and ' + time + ' minutes'
         else:
             arvl_msg += time + ', '
-    return arvl_msg
+    embed = discord.Embed(title="Arrival Times", description=arvl_msg, color=0xb00800)
+
+    return embed
 
 def rtrv_rucs(*args):
-    return '"1) download twitch client at https://app.twitch.tv/download and install.\n\
-2) once installed go into mods and then Minecraft and search for FTB presents Direwolf20 mod pack \n\
+    embed = discord.Embed(title="Follow these instructions in order to find out how to access the rutgers minecraft server!", description=
+    "1) Download twitch client at https://app.twitch.tv/download and install\n\
+2) Once installed go into mods and then Minecraft and search for FTB presents Direwolf20 mod pack \n\
 3) DO NOT INSTALL YET \n\
-4) go into versions and select 2.4.0 (should be first in list) \n\
-5) while mod is installing go to top right of twitch app \n\
+4) Go into versions and select 2.4.0 (should be first in list) \n\
+5) While mod is installing go to top right of twitch app \n\
    go to setting -> minecraft and change max allocated memory to at least 4 gigs \n\
-6) after mod has finished installing start mod and then connect to RUCS server at IP address 149.56.242:25595"'
+6) After mod has finished installing start mod and then connect to RUCS server at IP address 149.56.242:25595", color=0xb00800)
+
+    return embed
