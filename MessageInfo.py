@@ -34,7 +34,8 @@ def rtrv_arvl(bus_obj, command):
     attributes = predictions[0].attributes
     for counter in range(len(attributes)):
         if str(attributes.item(counter).nodeName) == 'dirTitleBecauseNoPredictions':
-            return 'This bus is not currently running'
+            embed = discord.Embed(title="Arrival Times", description= "The bus is not currently running.", color=0xb00800)
+            return embed
     arvl_info = dom.getElementsByTagName('prediction')
     for counter in range(arvl_info.length):
         arvl_tms.append(str(arvl_info[counter].attributes['minutes'].value))
@@ -48,7 +49,8 @@ def rtrv_arvl(bus_obj, command):
     return embed
 
 def rtrv_rucs(*args):
-    embed = discord.Embed(title="Follow these instructions in order to find out how to access the rutgers minecraft server!", description="1) Download twitch client at https://app.twitch.tv/download and install\n\
+    embed = discord.Embed(title="Follow these instructions in order to find out how to access the rutgers minecraft server!", description=
+    "1) Download twitch client at https://app.twitch.tv/download and install\n\
 2) Once installed go into mods and then Minecraft and search for FTB presents Direwolf20 mod pack \n\
 3) DO NOT INSTALL YET \n\
 4) Go into versions and select 2.4.0 (should be first in list) \n\

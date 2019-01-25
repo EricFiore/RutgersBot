@@ -53,14 +53,14 @@ def error_parse(err_msg, bus_obj):
 
 
 def starvl_parse(err_msg):
-    rtrn_msg = 'you might be referring to stop \n'
+    rtrn_msg = 'You might be referring to one of the following stops: \n'
     for counter, stop in enumerate(err_msg):
         rtrn_msg += stop + '\n'
     return rtrn_msg
 
 
 def sterror_parse(err_msg, bus_stps):
-    rtrn_msg = 'you might be referring to bus '
+    rtrn_msg = 'You might be referring to one of the following buses:'
     for counter, stops in enumerate(err_msg):
         rtrn_msg += err_msg[counter] + ' with stops \n'
         for key, value in bus_stps[err_msg[counter]].items():

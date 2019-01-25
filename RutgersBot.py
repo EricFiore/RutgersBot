@@ -24,12 +24,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    '''
+
+
     if isinstance(message.channel, discord.abc.GuildChannel):
         print("{0:s} {1:s} {2:d} {3:s}: {4:s}".format(message.guild.name, message.channel.name, message.author.id, message.author.name, message.content))
     elif isinstance(message.channel, discord.abc.PrivateChannel):
         print("Direct Message {0:d} {1:s}: {2:s} ".format(message.author.id, message.author.name, message.content))
-
-    if '=rbot' in message.content.lower():
+'''
+    if 'r!' in message.content.lower():
         command = pd.msg_parse(message.content, bus_info)
         if isinstance(command[len(command)-1], list):
             msg = pd.error_parse(command[len(command)-1], bus_info)
